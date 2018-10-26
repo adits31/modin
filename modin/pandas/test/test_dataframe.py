@@ -3087,6 +3087,12 @@ def test_squeeze():
     assert ray_df_3.squeeze() == (pandas_df_3.squeeze()) # == used because np.int64 expected
 
 
+def test_nlargest():
+    frame_data = {"col1": [0, 1, 2, 3], "col2": [4, 5, 6, 7], "col3": [8, 9, 10, 11], "col4": [12, 13, 14, 15], "col5": [0, 0, 0, 0],}
+    ray_df = pd.DataFrame(frame_data)
+    print(ray_df.nlargest(2, ["col2"]))
+
+
 @pytest.mark.skip(reason="Defaulting to Pandas")
 def test_stack():
     ray_df = create_test_dataframe()

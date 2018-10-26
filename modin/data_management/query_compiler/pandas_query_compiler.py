@@ -1806,7 +1806,7 @@ class PandasQueryCompiler(object):
         print(new_data.to_pandas())
         #new_index = self.compute_index(0, new_data, True)
         #return self.__constructor__(new_data, self.index, self.columns)
-
+        
     # END Map across rows/columns
 
     # Map across rows/columns
