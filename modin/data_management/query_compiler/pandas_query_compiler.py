@@ -1794,6 +1794,19 @@ class PandasQueryCompiler(object):
         new_dtypes = pandas.Series([np.float64 for _ in new_columns], index=new_columns)
         return self.__constructor__(new_data, self.index, new_columns, new_dtypes)
 
+    def nlargest(self, **kwargs):
+        global_indices = self.global_idx_to_numeric_idx("col", kwargs.get("columns"))
+        del kwargs["columns"]
+        def nlargest_builder(df, internal_indices=[]): #internal indices are empty, why?
+            raise ValueError(internal_indices)
+            raise ValueError(pandas.DataFrame.nlargest(df, columns=internal_indices, **kwargs))
+
+        func = self._prepare_method(nlargest_builder, **kwargs)
+        new_data = self.map_across_full_axis_select_indices(0, func, global_indices, False)
+        print(new_data.to_pandas())
+        #new_index = self.compute_index(0, new_data, True)
+        #return self.__constructor__(new_data, self.index, self.columns)
+
     # END Map across rows/columns
 
     # Map across rows/columns

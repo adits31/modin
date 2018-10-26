@@ -2420,12 +2420,12 @@ def test_ne():
     test_comparison_inter_ops("ne")
 
 
-@pytest.mark.skip(reason="Defaulting to Pandas")
+#@pytest.mark.skip(reason="Defaulting to Pandas")
 def test_nlargest():
-    ray_df = create_test_dataframe()
-
-    with pytest.raises(NotImplementedError):
-        ray_df.nlargest(None, None)
+    frame_data = {"col1": [0, 1, 2, 3], "col2": [4, 5, 6, 7], "col3": [8, 9, 10, 11], "col4": [12, 13, 14, 15], "col5": [0, 0, 0, 0],}
+    ray_df = pd.DataFrame(frame_data)
+    print(ray_df.nlargest(2, ["col2"]))
+    #raise ValueError
 
 
 @pytest.fixture

@@ -2563,11 +2563,8 @@ class DataFrame(object):
         return self._create_dataframe_from_manager(new_manager)
 
     def nlargest(self, n, columns, keep="first"):
-        return self._default_to_pandas_func(
-            pandas.DataFrame.nlargest, n, columns, keep=keep
-        )
+        return DataFrame(data_manager=self._data_manager.nlargest(n=n, columns=columns, keep=keep))
         
-
     def notna(self):
         """Perform notna across the DataFrame.
 
